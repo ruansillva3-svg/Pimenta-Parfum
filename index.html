@@ -171,8 +171,16 @@ nav.links a:hover::after{ right:0; }
 .modal-close{ position:absolute; top:16px; right:16px; width:36px; height:36px; border-radius:50%; background: rgba(255,255,255,.08); color: var(--silver-1); font-size:18px; z-index:5; }
 .modal-close:hover{ background: rgba(255,255,255,.18); }
 .modal-grid{ display:grid; grid-template-columns: 1fr 1fr; }
-.modal-gallery-main{ aspect-ratio:4/5; overflow:hidden; }
+.modal-gallery-main{ aspect-ratio:4/5; overflow:hidden; position:relative; }
 .modal-gallery-main img{ width:100%; height:100%; object-fit:cover; }
+.gallery-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%;
+  background: rgba(11,10,9,.55); color:#fff; font-size:22px; line-height:1; display:flex;
+  align-items:center; justify-content:center; transition: background .2s ease, transform .2s ease;
+}
+.gallery-arrow:hover{ background: rgba(11,10,9,.85); }
+.arrow-prev{ left:14px; }
+.arrow-next{ right:14px; }
 .modal-gallery-thumbs{ display:flex; gap:10px; padding:14px 20px; }
 .modal-gallery-thumbs button{ width:54px; height:68px; border-radius:2px; overflow:hidden; opacity:.6; border:1px solid rgba(174,172,159,.25); padding:0; }
 .modal-gallery-thumbs button.active{ opacity:1; border-color: var(--silver-1); }
@@ -403,7 +411,11 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     <button class="modal-close" id="modalClose">✕</button>
     <div class="modal-grid">
       <div>
-        <div class="modal-gallery-main"><img id="modalMainImg" src="" alt=""></div>
+        <div class="modal-gallery-main">
+          <img id="modalMainImg" src="" alt="">
+          <button type="button" class="gallery-arrow arrow-prev" id="modalPrevBtn" aria-label="Foto anterior">‹</button>
+          <button type="button" class="gallery-arrow arrow-next" id="modalNextBtn" aria-label="Próxima foto">›</button>
+        </div>
         <div class="modal-gallery-thumbs" id="modalThumbs"></div>
       </div>
       <div class="modal-info">
@@ -609,25 +621,21 @@ const CONFIG = {
    categorias pode ter mais de um valor, ex: ["feminino","masculino"]
    ========================================================= */
 const PRODUTOS = [
-{
-        id: "royal-amber",
-        nome: "Royal Amber",
-        categorias: ["feminino"],
-        preco: 80.00,
-        descricaoCurta: "Royal Amber de Orientica Premium é um perfume Oriental Baunilha Compartilhável.",
-        descricaoLonga: "Royal Amber de Orientica Premium é um perfume Oriental Baunilha Compartilhável. Royal Amber foi lançado em 2021. As notas de topo são: Bergamota e Notas Verdes. As notas de coração são: Notas Doces, Melão, Abacaxi e Âmbar. As notas de fundo são: Almíscar, Notas Amadeiradas e Baunilha.",
-        imagens: [
-            "royal amber 1.png",
-            "royal amber 2.png",
-            "produto-marmore.jpg",
-            "produto-cafe.jpg",
-            "produto-mesa.jpg",
-            "produto-cinza.jpg",
-            "produto-sala.jpg",
-            "produto-mesa.png",
-            "produto-noite.jpg"
-        ]
-    }
+  {
+    id: "imperium",
+    nome: "Imperium",
+    categorias: ["masculino", "feminino"],
+    preco: 80.00,
+    descricaoCurta: "Não é apenas uma fragrância. É um símbolo de poder.",
+    descricaoLonga: "Criado para homens e mulheres que deixam sua marca por onde passam. O Imperium une uma apresentação visual de alta costura a uma essência inesquecível, com fixação de longa duração.",
+    imagens: [
+      "assets/produto-marmore.jpg",
+      "assets/produto-cinza.jpg",
+      "assets/produto-sala.jpg",
+      "assets/produto-mesa.jpg",
+      "assets/produto-cafe.jpg"
+    ]
+  }
   // ,{ id: "novo-perfume", nome: "...", categorias: ["infantil"], preco: 0, descricaoCurta: "...", descricaoLonga: "...", imagens: ["assets/foto1.jpg"] }
 ];
 
@@ -798,6 +806,15 @@ produtosGrid.addEventListener("click", (e) => {
 const modalOverlay = document.getElementById("modalOverlay");
 let modalProdutoAtual = null;
 let modalQty = 1;
+let modalImgIndex = 0;
+
+function showModalImage(idx){
+  if (!modalProdutoAtual) return;
+  const total = modalProdutoAtual.imagens.length;
+  modalImgIndex = (idx + total) % total; // mantém o índice sempre dentro do alcance, "dando a volta"
+  document.getElementById("modalMainImg").src = modalProdutoAtual.imagens[modalImgIndex];
+  document.querySelectorAll("#modalThumbs button").forEach((b, i) => b.classList.toggle("active", i === modalImgIndex));
+}
 
 function openModal(id){
   const p = getProduto(id);
@@ -809,10 +826,10 @@ function openModal(id){
   document.getElementById("modalDesc").textContent = p.descricaoLonga;
   document.getElementById("modalPreco").textContent = formatBRL(p.preco);
   document.getElementById("modalQtyValue").textContent = modalQty;
-  document.getElementById("modalMainImg").src = p.imagens[0];
   document.getElementById("modalThumbs").innerHTML = p.imagens.map((img, idx) => `
-    <button data-img="${img}" class="${idx === 0 ? "active" : ""}"><img src="${img}" alt=""></button>
+    <button data-idx="${idx}" class="${idx === 0 ? "active" : ""}"><img src="${img}" alt=""></button>
   `).join("");
+  showModalImage(0);
   modalOverlay.classList.add("open");
 }
 function closeModal(){ modalOverlay.classList.remove("open"); }
@@ -822,9 +839,18 @@ modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) c
 document.getElementById("modalThumbs").addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
-  document.querySelectorAll("#modalThumbs button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  document.getElementById("modalMainImg").src = btn.dataset.img;
+  showModalImage(Number(btn.dataset.idx));
+});
+
+document.getElementById("modalPrevBtn").addEventListener("click", () => showModalImage(modalImgIndex - 1));
+document.getElementById("modalNextBtn").addEventListener("click", () => showModalImage(modalImgIndex + 1));
+
+/* Setas do teclado (← →) também funcionam quando a janela do produto está aberta */
+document.addEventListener("keydown", (e) => {
+  if (!modalOverlay.classList.contains("open")) return;
+  if (e.key === "ArrowLeft") showModalImage(modalImgIndex - 1);
+  if (e.key === "ArrowRight") showModalImage(modalImgIndex + 1);
+  if (e.key === "Escape") closeModal();
 });
 
 document.getElementById("modalQtyPlus").addEventListener("click", () => { modalQty++; document.getElementById("modalQtyValue").textContent = modalQty; });
