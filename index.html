@@ -316,7 +316,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
   .sobre p{ margin-left:auto; margin-right:auto; }
 }
 @media (max-width: 560px){
-  .row2{ grid-template-columns:1fr; }
+  .row2 { grid-template-columns: repeat(2, 1fr) !important; }
   .hero-buttons{ flex-direction:column; width:100%; }
   .hero-buttons .btn{ width:100%; }
   .footer-grid{ flex-direction:column; gap:24px; }
@@ -369,10 +369,6 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     <img src="assets/logo.png" class="hero-logo" alt="">
     <h1>IMPERIUM</h1>
     <span class="tagline">Não é apenas uma fragrância. É um símbolo de poder.</span>
-    <div class="price-row">
-      <span class="from">a partir de</span>
-      <span class="value">R$ 80,00</span>
-    </div>
     <div class="hero-buttons">
       <a href="#catalogo" class="btn btn-primary">Ver Catálogo</a>
       <a href="#sobre" class="btn btn-ghost">Conhecer a Marca</a>
@@ -567,8 +563,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     <div class="reveal">
       <span class="eyebrow">A Marca</span>
       <h2>Pimenta Parfum</h2>
-      <p>Nascemos da ideia de que perfumaria de alto padrão não precisa ser inacessível. Cada frasco é pensado como uma peça — não apenas um vidro, mas uma declaração sobre quem o carrega.</p>
-      <p>O Imperium é o primeiro capítulo dessa história. Mais lançamentos estão por vir.</p>
+      <p>Na Pimenta Parfum, acreditamos que a verdadeira sofisticação reside na capacidade de ser inesquecível. Criamos fragrâncias que transcendem o óbvio, unindo excelência olfativa a um design que é, em si, uma assinatura de estilo. Mais do que perfumes, oferecemos declarações de poder e identidade para aqueles que não apenas passam, mas deixam sua marca por onde seguem.</p>
     </div>
   </div>
 </section>
@@ -607,11 +602,11 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
    ========================================================= */
 const CONFIG = {
   // ⚠️ TROQUE pelo número da Pimenta Parfum, com DDI + DDD, só números.
-  whatsappOwner: "5521977126632",
+  whatsappOwner: "5521964176126",
   // Mensagem que abre quando alguém clica no botão flutuante / rodapé
   whatsappMensagemPadrao: "Olá! Você pode me ajudar?",
   // Sua chave Pix (CPF, e-mail, telefone ou chave aleatória)
-  pixKey: "179.866.597-26",
+  pixKey: "21964176126",
 };
 
 /* =========================================================
@@ -821,6 +816,8 @@ function renderCatalogo(){
         <h3 data-open="${p.id}">${p.nome}</h3>
         <div class="preco">${formatBRL(p.preco)}</div>
         <button class="add-cart-btn" data-quickadd="${p.id}">Adicionar ao Carrinho</button>
+        <button class="add-cart-btn" data-quickadd="${p.id}">Adicionar ao Carrinho</button>
+<a href="https://wa.me/5521964176126?text=Olá, quero comprar o perfume ${p.nome}" style="display:block; text-align:center; margin-top:5px; background:#25d366; color:white; padding:5px; border-radius:5px; text-decoration:none;">Comprar Agora</a>
       </div>
     </div>
   `).join("");
