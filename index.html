@@ -286,7 +286,13 @@ nav.links a:hover::after{ right:0; }
    ========================================================= */
 .sobre{ background: var(--charcoal); padding: 110px 0; }
 .sobre-grid{ display:grid; grid-template-columns: .8fr 1.2fr; gap:60px; align-items:center; }
-.sobre img.brand-logo{ width:160px; height:160px; border-radius:50%; margin:0 auto; box-shadow:0 0 0 1px rgba(174,172,159,.35); object-fit:cover; }
+.sobre img.brand-logo { 
+    width: 250px !important; 
+    height: 250px !important; 
+    border-radius: 0 !important; 
+    object-fit: cover; 
+    margin: 0 auto; 
+}
 .sobre h2{ font-size: clamp(30px,3.6vw,40px); color: var(--silver-1); margin-bottom:18px; }
 .sobre p{ color: var(--text-soft); max-width:520px; }
 .sobre p + p{ margin-top:14px; }
@@ -329,7 +335,11 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
 </style>
 </head>
 <body>
-
+<div class="banner-container">
+    <img src="image_8e7fdc.jpg" alt="Banner 1" style="width:100%">
+    <img src="image_8e7fe2.jpg" alt="Banner 2" style="width:100%">
+    <img src="image_8e833f.png" alt="Banner 3" style="width:100%">
+</div>
 <!-- =================== CABEÇALHO =================== -->
 <header id="header">
   <div class="wrap nav-row">
@@ -815,7 +825,6 @@ function renderCatalogo(){
         <span class="tag">${p.categorias.join(" · ")}</span>
         <h3 data-open="${p.id}">${p.nome}</h3>
         <div class="preco">${formatBRL(p.preco)}</div>
-        <button class="add-cart-btn" data-quickadd="${p.id}">Adicionar ao Carrinho</button>
         <button class="add-cart-btn" data-quickadd="${p.id}">Adicionar ao Carrinho</button>
 <a href="https://wa.me/5521964176126?text=Olá, quero comprar o perfume ${p.nome}" style="display:block; text-align:center; margin-top:5px; background:#25d366; color:white; padding:5px; border-radius:5px; text-decoration:none;">Comprar Agora</a>
       </div>
