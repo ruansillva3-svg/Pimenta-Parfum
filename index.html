@@ -12,15 +12,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-   .banner-area {
+ .banner-area {
     width: 100%;
+    max-width: 900px; /* Limita a largura total */
+    height: 350px;    /* Ajuste aqui para o tamanho desejado (ex: 300px, 350px) */
+    margin: 20px auto; /* Centraliza o banner na página */
     overflow: hidden;
-    margin-bottom: 20px;
+    border-radius: 15px; /* Deixa as bordas arredondadas para um visual mais premium */
 }
-.carousel {
-    display: flex;
-    animation: slide 15s infinite;
-    width: 400%; /* Como são 4 imagens, 400% */
+
+/* Garante que a imagem se ajuste sem distorcer */
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
 }
 .carousel img {
     width: 25%; /* Cada imagem ocupa 1/4 da largura */
@@ -398,19 +403,22 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
 </div>
 
 <!-- =================== HERO =================== -->
-<section class="hero" id="topo">
-  <div class="hero-content">
-    <span class="eyebrow">Pimenta Parfum apresenta</span>
-    <img src="assets/logo.png" class="hero-logo" alt="">
-    <h1>IMPERIUM</h1>
-    <span class="tagline">Não é apenas uma fragrância. É um símbolo de poder.</span>
-    <div class="hero-buttons">
-      <a href="#catalogo" class="btn btn-primary">Ver Catálogo</a>
-      <a href="#sobre" class="btn btn-ghost">Conhecer a Marca</a>
+<!-- Banner Carrossel -->
+<section class="banner-area">
+    <div class="carousel">
+        <img src="Banner 1.jpeg" alt="Banner 1">
+        <img src="Banner 2.jpeg" alt="Banner 2">
+        <img src="Banner 3.jpeg" alt="Banner 3">
+        <img src="Banner 4.jpeg" alt="Banner 4">
     </div>
-  </div>
-  <div class="scroll-cue"></div>
 </section>
+
+<!-- Botão Integrado -->
+<div style="text-align: center; margin-top: -50px; margin-bottom: 30px; position: relative; z-index: 10;">
+    <a href="#catalogo" style="background-color: #f3efe5; color: #1c1a16; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px;">
+        VER CATÁLOGO
+    </a>
+</div>
 
 <div class="facet-strip"></div>
 
