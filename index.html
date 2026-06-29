@@ -1,3 +1,6 @@
+
+
+Index · HTML
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,54 +9,65 @@
 <title>Pimenta Parfum — Imperium</title>
 <meta name="description" content="Pimenta Parfum. Perfumaria de alto padrão, acessível. Conheça o Imperium e o catálogo completo.">
 <link rel="icon" href="assets/logo.png">
-
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+ 
 <style>
- .banner-area {
-    width: 100%;
-    max-width: 1000px; /* Largura máxima que você quer para o banner */
-    margin: 20px auto; /* Centralizado */
-    overflow: hidden;
-    border-radius: 15px; /* Bordas arredondadas */
+/* =========================================================
+   0. BANNER CARROSSEL (ÚNICO)
+   ========================================================= */
+.banner-section{
+  width: 100%;
+  max-width: 1000px;
+  margin: 96px auto 0; /* espaço pro header fixo não cobrir o banner */
+  padding: 0 16px;
 }
-
-.banner-area img {
-    width: 100%;
-    display: block;
+.bannerSwiper{
+  width: 100%;
+  height: 350px;
+  border-radius: 15px;
+  overflow: hidden;
 }
- /* Estilo das setas do Swiper */
- .swiper {
-    height: 350px; /* Ajuste para o tamanho que preferir */
+.bannerSwiper .swiper-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-
-.swiper-slide img {
-    height: 100%;
-    object-fit: cover;
+.swiper-button-next, .swiper-button-prev{
+  color: var(--cream);
+  background: rgba(0,0,0,.35);
+  width: 40px; height: 40px;
+  border-radius: 50%;
 }
- .btn-banner {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f3efe5;
-    color: #1c1a16;
-    padding: 12px 25px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    z-index: 10;
+.swiper-button-next::after, .swiper-button-prev::after{ font-size: 16px; }
+ 
+.banner-cta-wrap{
+  text-align: center;
+  margin: 22px 0 36px;
 }
-.swiper-button-next, .swiper-button-prev {
-    color: #f3efe5; /* Cor das setas */
-    background: rgba(0,0,0,0.3); /* Fundo levemente escuro para dar contraste */
-    padding: 20px;
-    border-radius: 50%;
+.banner-cta-btn{
+  display: inline-block;
+  background-color: #f3efe5;
+  color: #1c1a16;
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: transform .2s ease;
 }
+.banner-cta-btn:hover{ transform: translateY(-2px); }
+ 
+@media (max-width: 560px){
+  .bannerSwiper{ height: 220px; }
+}
+ 
 /* =========================================================
    1. CONFIGURAÇÕES VISUAIS
    ========================================================= */
@@ -68,15 +82,15 @@
   --cream:      #f3efe5;
   --text-soft:  #d8d5c9;
   --text-dark:  #1c1a16;
-
+ 
   --display: 'Cinzel', serif;
   --script:  'Cormorant Garamond', serif;
   --body:    'Jost', sans-serif;
-
+ 
   --maxw: 1180px;
   --radius: 2px;
 }
-
+ 
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
 body{
@@ -91,7 +105,7 @@ button{ font-family: var(--body); cursor:pointer; border:none; background:none; 
 .eyebrow{ font-size: 12.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--silver-2); }
 h1,h2,h3{ font-family: var(--display); font-weight: 600; letter-spacing: .03em; margin: 0; }
 .tagline{ font-family: var(--script); font-style: italic; font-weight: 400; }
-
+ 
 .facet-strip{
   height: 30px; background-color: var(--ink);
   background-image:
@@ -100,11 +114,11 @@ h1,h2,h3{ font-family: var(--display); font-weight: 600; letter-spacing: .03em; 
   opacity:.5;
 }
 .facet-strip.on-cream{ background-color: var(--cream); }
-
+ 
 .reveal{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in{ opacity:1; transform:none; }
 @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
-
+ 
 /* =========================================================
    2. CABEÇALHO
    ========================================================= */
@@ -122,13 +136,13 @@ nav.links{ display:flex; gap:32px; }
 nav.links a{ font-size:13px; letter-spacing:.12em; text-transform:uppercase; color: var(--text-soft); position:relative; padding-bottom:4px; }
 nav.links a::after{ content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background: var(--silver-2); transition: right .3s ease; }
 nav.links a:hover::after{ right:0; }
-
+ 
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding: 13px 28px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; border-radius: var(--radius); transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
 .btn-primary{ background: linear-gradient(135deg, var(--silver-1), var(--silver-2)); color: var(--ink); font-weight:600; }
 .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.35); }
 .btn-ghost{ border:1px solid var(--silver-2); color: var(--silver-1); }
 .btn-ghost:hover{ background: rgba(241,239,233,.08); }
-
+ 
 .nav-cta{ display:flex; align-items:center; gap:16px; }
 .cart-btn{ position:relative; width:42px; height:42px; display:flex; align-items:center; justify-content:center; flex:none; }
 .cart-btn svg{ width:22px; height:22px; stroke: var(--silver-1); fill:none; stroke-width:1.6; }
@@ -142,7 +156,7 @@ nav.links a:hover::after{ right:0; }
 .mobile-panel{ display:none; position:fixed; inset:0; z-index:49; background: var(--ink); padding: 110px 28px 28px; flex-direction:column; gap:26px; }
 .mobile-panel.open{ display:flex; }
 .mobile-panel a{ font-size:20px; font-family: var(--display); letter-spacing:.08em; color: var(--silver-1); }
-
+ 
 /* =========================================================
    3. HERO
    ========================================================= */
@@ -162,7 +176,7 @@ nav.links a:hover::after{ right:0; }
 .scroll-cue::after{ content:""; position:absolute; left:-2px; top:0; width:5px; height:5px; border-radius:50%; background: var(--silver-1); animation: drip 2.2s ease-in-out infinite; }
 @keyframes drip{ 0%{ top:0; opacity:1;} 90%{ opacity:0;} 100%{ top:46px; opacity:0;} }
 @media (prefers-reduced-motion: reduce){ .scroll-cue::after{ animation:none; top:30px; } }
-
+ 
 /* =========================================================
    4. CATÁLOGO
    ========================================================= */
@@ -170,7 +184,7 @@ nav.links a:hover::after{ right:0; }
 .catalogo-head{ text-align:center; max-width:600px; margin:0 auto 40px; }
 .catalogo-head h2{ font-size: clamp(32px,4vw,44px); color: var(--silver-1); }
 .catalogo-head p{ margin-top:12px; color: var(--text-soft); }
-
+ 
 .cat-tabs{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:48px; }
 .cat-tab{
   padding:10px 22px; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase;
@@ -178,7 +192,7 @@ nav.links a:hover::after{ right:0; }
   transition: all .25s ease;
 }
 .cat-tab.active, .cat-tab:hover{ background: var(--silver-1); color: var(--ink); border-color: var(--silver-1); }
-
+ 
 .produtos-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:32px; }
 .produto-card{ background: var(--charcoal); border-radius: var(--radius); overflow:hidden; transition: transform .3s ease, box-shadow .3s ease; }
 .produto-card:hover{ transform: translateY(-6px); box-shadow: 0 24px 50px rgba(0,0,0,.4); }
@@ -197,7 +211,7 @@ nav.links a:hover::after{ right:0; }
 .add-cart-btn:hover{ background: var(--silver-1); color: var(--ink); }
 .add-cart-btn.added{ background: var(--garnet); color:#fff; border-color: var(--garnet); }
 .empty-msg{ text-align:center; color: var(--silver-3); padding: 40px 0; grid-column: 1/-1; }
-
+ 
 /* =========================================================
    5. MODAL DE PRODUTO
    ========================================================= */
@@ -236,7 +250,7 @@ nav.links a:hover::after{ right:0; }
 .modal-qty button{ width:36px; height:36px; border:1px solid var(--silver-2); border-radius:50%; color: var(--silver-1); font-size:16px; }
 .modal-qty span{ font-family: var(--display); font-size:18px; min-width:22px; text-align:center; color: var(--silver-1); }
 @media (max-width:760px){ .modal-grid{ grid-template-columns:1fr; } }
-
+ 
 /* =========================================================
    6. CARRINHO (DRAWER)
    ========================================================= */
@@ -263,7 +277,7 @@ nav.links a:hover::after{ right:0; }
 .cart-total-row{ display:flex; justify-content:space-between; margin-bottom:16px; font-size:15px; }
 .cart-total-row .value{ font-family: var(--display); font-size:22px; }
 .cart-empty{ text-align:center; color: var(--silver-3); padding: 60px 20px; }
-
+ 
 /* =========================================================
    7. PEDIDO (CHECKOUT)
    ========================================================= */
@@ -271,23 +285,23 @@ nav.links a:hover::after{ right:0; }
 .pedido-head{ text-align:center; max-width:600px; margin:0 auto 50px; }
 .pedido-head h2{ font-size: clamp(32px,4vw,44px); color: var(--ink); }
 .pedido-head p{ margin-top:14px; color: var(--silver-3); }
-
+ 
 .steps{ display:flex; justify-content:center; gap:48px; margin-bottom:56px; flex-wrap:wrap; }
 .step{ text-align:center; max-width:200px; }
 .step .num{ width:34px; height:34px; margin:0 auto 12px; border-radius:50%; border:1px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:14px; }
 .step p{ margin:0; font-size:13px; color: var(--silver-3); }
 .step strong{ display:block; font-size:14px; color: var(--ink); margin-bottom:4px; letter-spacing:.04em; }
-
+ 
 .form-card{ background:#fff; max-width: 640px; margin:0 auto; padding: 48px clamp(24px,5vw,56px); position:relative; box-shadow: 0 30px 70px rgba(0,0,0,.12); border-radius: var(--radius); }
 .form-card::before, .form-card::after{ content:""; position:absolute; width:18px; height:18px; background: var(--garnet); transform:rotate(45deg); }
 .form-card::before{ top:-9px; left:-9px; }
 .form-card::after{ bottom:-9px; right:-9px; }
-
+ 
 .order-summary{ margin-bottom:30px; border:1px solid #ddd6c6; border-radius:2px; }
 .order-summary-row{ display:flex; justify-content:space-between; gap:12px; padding:12px 16px; font-size:14px; border-bottom:1px solid #ece6d8; }
 .order-summary-row:last-child{ border-bottom:none; }
 .order-summary-empty{ padding:24px 16px; text-align:center; color: var(--silver-3); font-size:14px; }
-
+ 
 .field{ margin-bottom: 22px; }
 .field label{ display:block; font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color: var(--silver-3); margin-bottom:8px; }
 .field input, .field select, .field textarea{
@@ -298,31 +312,31 @@ nav.links a:hover::after{ right:0; }
 .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--garnet); background:#fff; }
 .field textarea{ resize:vertical; min-height:90px; }
 .row2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-
+ 
 .pay-options{ display:flex; gap:14px; flex-wrap:wrap; }
 .pay-options label{ flex:1; min-width:120px; border:1px solid #ddd6c6; padding:12px 14px; border-radius: var(--radius); display:flex; align-items:center; gap:10px; font-size:14px; cursor:pointer; background: var(--cream); }
 .pay-options input{ accent-color: var(--garnet); width:auto; }
 .pay-options label:has(input:checked){ border-color: var(--garnet); background:#fff; }
-
+ 
 .pay-note{ margin-top:14px; padding:14px 16px; border-radius:2px; font-size:13.5px; display:none; background:#efe9da; border:1px solid #ddd6c6; }
 .pay-note.show{ display:block; }
 .pay-note .pix-key{ font-family: var(--display); font-size:15px; margin: 6px 0; }
 .pay-note button{ font-size:12px; text-decoration:underline; color: var(--garnet); }
-
+ 
 .entrega-fields{ overflow:hidden; max-height:0; transition: max-height .35s ease; }
 .entrega-fields.open{ max-height: 420px; }
-
+ 
 .total-row{ display:flex; justify-content:space-between; align-items:center; margin: 30px 0 26px; padding-top: 22px; border-top:1px solid #ddd6c6; }
 .total-row .label{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color: var(--silver-3); }
 .total-row .value{ font-family: var(--display); font-size:28px; color: var(--ink); }
-
+ 
 .submit-btn{ width:100%; background: var(--ink); color: var(--silver-1); padding:17px; font-size:13.5px; letter-spacing:.16em; text-transform:uppercase; border-radius: var(--radius); display:flex; align-items:center; justify-content:center; gap:10px; transition: background .25s ease, transform .2s ease; }
 .submit-btn:hover{ background: var(--garnet-dark); transform: translateY(-2px); }
 .submit-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
 .form-note{ font-size:12.5px; color: var(--silver-3); text-align:center; margin-top:14px; }
 .fallback-link{ display:none; text-align:center; margin-top:14px; font-size:13px; }
 .fallback-link a{ text-decoration:underline; color: var(--garnet); }
-
+ 
 /* =========================================================
    8. SOBRE
    ========================================================= */
@@ -338,7 +352,7 @@ nav.links a:hover::after{ right:0; }
 .sobre h2{ font-size: clamp(30px,3.6vw,40px); color: var(--silver-1); margin-bottom:18px; }
 .sobre p{ color: var(--text-soft); max-width:520px; }
 .sobre p + p{ margin-top:14px; }
-
+ 
 /* =========================================================
    9. RODAPÉ + WHATSAPP FLUTUANTE
    ========================================================= */
@@ -348,11 +362,11 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
 .footer-col p, .footer-col a{ font-size:14px; color: var(--text-soft); display:block; margin-bottom:8px; }
 .footer-col a:hover{ color: var(--silver-1); }
 .copy{ text-align:center; font-size:12.5px; color: var(--silver-3); border-top:1px solid rgba(174,172,159,.12); padding-top:24px; }
-
+ 
 .wa-float{ position:fixed; bottom:24px; right:24px; z-index:60; width:58px; height:58px; border-radius:50%; background:#25d366; display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 26px rgba(0,0,0,.4); transition: transform .25s ease; }
 .wa-float:hover{ transform: scale(1.08); }
 .wa-float svg{ width:28px; height:28px; flex:none; }
-
+ 
 /* =========================================================
    10. RESPONSIVO
    ========================================================= */
@@ -377,40 +391,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
 </style>
 </head>
 <body>
-<!-- Swiper -->
-<div class="swiper mySwiper" style="width: 100%; max-width: 1000px; margin: 20px auto; position: relative;">
-  <div class="swiper-wrapper">
-    <!-- Repita este bloco para cada banner -->
-    <div class="swiper-slide" style="position: relative;">
-        <img src="Banner 1.jpeg" style="width: 100%; border-radius: 15px; display: block;">
-        <a href="#catalogo" class="btn-banner">VER CATÁLOGO</a>
-    </div>
-    <div class="swiper-slide" style="position: relative;">
-        <img src="Banner 4.jpeg" style="width: 100%; border-radius: 15px; display: block;">
-        <a href="#catalogo" class="btn-banner">VER CATÁLOGO</a>
-    </div>
-  </div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-
-<!-- Script para ativar o Swiper -->
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
-</script>
-
-<!-- Botão -->
-<div style="text-align: center; margin-top: -30px; margin-bottom: 40px;">
-    <a href="#catalogo" style="background-color: #f3efe5; color: #1c1a16; padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px;">
-        VER CATÁLOGO
-    </a>
-</div>
-</section>
+ 
 <!-- =================== CABEÇALHO =================== -->
 <header id="header">
   <div class="wrap nav-row">
@@ -435,34 +416,45 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     </div>
   </div>
 </header>
-
+ 
 <div class="mobile-panel" id="mobilePanel">
   <a href="#catalogo">Catálogo</a>
   <a href="#pedido">Finalizar Pedido</a>
   <a href="#sobre">A Marca</a>
   <a href="#topo" id="closePanel" style="margin-top:30px; font-size:14px; color:#aeac9f;">Fechar ✕</a>
 </div>
-
-<!-- =================== HERO =================== -->
-<!-- Banner Carrossel -->
-<section class="banner-area">
-    <div class="carousel">
-        <img src="Banner 1.jpeg" alt="Banner 1">
-        <img src="Banner 2.jpeg" alt="Banner 2">
-        <img src="Banner 3.jpeg" alt="Banner 3">
-        <img src="Banner 4.jpeg" alt="Banner 4">
+ 
+<!-- =================== BANNER CARROSSEL (ÚNICO) =================== -->
+<section class="banner-section">
+  <div class="swiper bannerSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="Banner 1.jpeg" alt="Banner 1"></div>
+      <div class="swiper-slide"><img src="Banner 2.jpeg" alt="Banner 2"></div>
+      <div class="swiper-slide"><img src="Banner 3.jpeg" alt="Banner 3"></div>
+      <div class="swiper-slide"><img src="Banner 4.jpeg" alt="Banner 4"></div>
     </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+ 
+  <div class="banner-cta-wrap">
+    <a href="#catalogo" class="banner-cta-btn">VER CATÁLOGO</a>
+  </div>
 </section>
-
-<!-- Botão Integrado -->
-<div style="text-align: center; margin-top: -50px; margin-bottom: 30px; position: relative; z-index: 10;">
-    <a href="#catalogo" style="background-color: #f3efe5; color: #1c1a16; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px;">
-        VER CATÁLOGO
-    </a>
-</div>
-
+ 
+<script>
+  new Swiper(".bannerSwiper", {
+    loop: true,
+    autoplay: { delay: 4000, disableOnInteraction: false },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+ 
 <div class="facet-strip"></div>
-
+ 
 <!-- =================== CATÁLOGO =================== -->
 <section class="catalogo" id="catalogo">
   <div class="wrap">
@@ -471,20 +463,20 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
       <h2>Nosso Catálogo</h2>
       <p>Escolha seus favoritos, adicione ao carrinho e finalize pelo WhatsApp.</p>
     </div>
-
+ 
     <div class="cat-tabs reveal" id="catTabs">
       <button class="cat-tab active" data-cat="todos">Todos</button>
       <button class="cat-tab" data-cat="feminino">Feminino</button>
       <button class="cat-tab" data-cat="masculino">Masculino</button>
       <button class="cat-tab" data-cat="infantil">Infantil</button>
     </div>
-
+ 
     <div class="produtos-grid reveal" id="produtosGrid"></div>
   </div>
 </section>
-
+ 
 <div class="facet-strip on-cream"></div>
-
+ 
 <!-- =================== MODAL DE PRODUTO =================== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
@@ -513,7 +505,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     </div>
   </div>
 </div>
-
+ 
 <!-- =================== CARRINHO (DRAWER) =================== -->
 <div class="cart-overlay" id="cartOverlay"></div>
 <aside class="cart-drawer" id="cartDrawer">
@@ -530,7 +522,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     <a href="#pedido" class="btn btn-primary" id="cartCheckoutBtn" style="width:100%">Finalizar Pedido</a>
   </div>
 </aside>
-
+ 
 <!-- =================== PEDIDO (CHECKOUT) =================== -->
 <section class="pedido" id="pedido">
   <div class="wrap">
@@ -538,7 +530,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
       <h2>Finalize Seu Pedido</h2>
       <p>Confirme os itens, preencha seus dados e envie. Seu pedido chega direto no nosso WhatsApp.</p>
     </div>
-
+ 
     <div class="steps reveal">
       <div class="step">
         <div class="num">1</div>
@@ -556,19 +548,19 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
         <p>Enviamos para o WhatsApp e fechamos por lá.</p>
       </div>
     </div>
-
+ 
     <form class="form-card reveal" id="pedidoForm">
-
+ 
       <div class="field">
         <label>Seu pedido</label>
         <div class="order-summary" id="orderSummary"></div>
       </div>
-
+ 
       <div class="field">
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" name="nome" placeholder="Como podemos te chamar?" required>
       </div>
-
+ 
       <div class="row2">
         <div class="field">
           <label for="whatsapp">Seu WhatsApp (com DDD)</label>
@@ -579,7 +571,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
           <input type="email" id="email" name="email" placeholder="seu@email.com">
         </div>
       </div>
-
+ 
       <div class="field">
         <label for="tipoEntrega">Como você quer receber?</label>
         <select id="tipoEntrega" name="tipoEntrega">
@@ -587,7 +579,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
           <option value="Entrega">Entrega no endereço</option>
         </select>
       </div>
-
+ 
       <div class="entrega-fields" id="entregaFields">
         <div class="field">
           <label for="endereco">Endereço e número</label>
@@ -604,7 +596,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
           </div>
         </div>
       </div>
-
+ 
       <div class="field">
         <label>Forma de pagamento</label>
         <div class="pay-options">
@@ -612,7 +604,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
           <label><input type="radio" name="pagamento" value="Cartão"> Cartão</label>
           <label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
         </div>
-
+ 
         <div class="pay-note" id="notePix">
           Pague com a chave Pix abaixo e nos envie o comprovante aqui pelo WhatsApp depois de enviar o pedido.
           <div class="pix-key" id="pixKeyText"></div>
@@ -622,24 +614,24 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
           Combinamos a forma de pagamento no cartão diretamente pelo WhatsApp depois de enviar o pedido.
         </div>
       </div>
-
+ 
       <div class="field">
         <label for="obs">Observações (opcional)</label>
         <textarea id="obs" name="obs" placeholder="Algum detalhe que devemos saber?"></textarea>
       </div>
-
+ 
       <div class="total-row">
         <span class="label">Total do pedido</span>
         <span class="value" id="totalValue">R$ 0,00</span>
       </div>
-
+ 
       <button type="submit" class="submit-btn" id="submitBtn">Enviar Pedido pelo WhatsApp</button>
       <p class="form-note">Você será redirecionado(a) ao WhatsApp com seu pedido já preenchido.</p>
       <p class="fallback-link" id="fallbackLink">Se não abriu automaticamente, <a href="#" id="fallbackA" target="_blank" rel="noopener">clique aqui</a>.</p>
     </form>
   </div>
 </section>
-
+ 
 <!-- =================== SOBRE A MARCA =================== -->
 <section class="sobre" id="sobre">
   <div class="wrap sobre-grid">
@@ -651,7 +643,7 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     </div>
   </div>
 </section>
-
+ 
 <!-- =================== RODAPÉ =================== -->
 <footer>
   <div class="wrap">
@@ -675,11 +667,11 @@ footer{ background: var(--ink); padding: 56px 0 32px; border-top:1px solid rgba(
     <p class="copy">© <span id="ano"></span> Pimenta Parfum. Todos os direitos reservados.</p>
   </div>
 </footer>
-
+ 
 <a class="wa-float js-wa-link" id="waFloat" href="https://wa.me/5500000000000" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 32 32" fill="white"><path d="M16 .395C7.163.395 0 7.557 0 16.395c0 3.176.93 6.13 2.55 8.605L.395 31.605l6.836-2.092A15.91 15.91 0 0 0 16 32.395c8.837 0 16-7.163 16-16S24.837.395 16 .395Zm0 29.02a13 13 0 0 1-6.65-1.823l-.477-.283-4.057 1.24 1.265-3.94-.31-.49A12.97 12.97 0 0 1 3.02 16.395C3.02 9.213 8.838 3.395 16 3.395c7.18 0 13 5.818 13 13s-5.82 13-13 13Zm7.13-9.74c-.39-.196-2.31-1.14-2.67-1.27-.36-.13-.62-.196-.88.196-.26.39-1.01 1.27-1.24 1.53-.23.26-.46.29-.85.1-.39-.196-1.64-.605-3.12-1.93-1.15-1.026-1.93-2.293-2.16-2.683-.23-.39-.025-.6.17-.795.196-.196.42-.51.63-.766.21-.256.28-.44.42-.736.14-.297.07-.553-.07-.766-.14-.213-.55-1.327-.755-1.825-.205-.498-.42-.43-.58-.44-.15-.01-.33-.012-.51-.012-.18 0-.47.066-.72.296-.25.23-.96.94-.96 2.293 0 1.353.985 2.66 1.12 2.84.14.18 1.92 2.93 4.65 4.106 2.73 1.176 2.73.785 3.22.736.49-.05 1.58-.646 1.81-1.27.23-.626.23-1.166.16-1.27-.07-.103-.26-.156-.55-.273Z"/></svg>
 </a>
-
+ 
 <script>
 /* =========================================================
    CONFIGURAÇÕES — edite só estas linhas, o resto se ajusta
@@ -692,7 +684,7 @@ const CONFIG = {
   // Sua chave Pix (CPF, e-mail, telefone ou chave aleatória)
   pixKey: "21964176126",
 };
-
+ 
 /* =========================================================
    CATÁLOGO DE PRODUTOS
    Para adicionar um novo perfume, copie um bloco { ... }
@@ -764,39 +756,39 @@ const PRODUTOS = [
       imagens: ["Lá vie est belle 1.png"]
   }
 ];
-
+ 
 /* ---------- Links de WhatsApp (rodapé + botão flutuante) ---------- */
 const mensagemPadraoCod = encodeURIComponent(CONFIG.whatsappMensagemPadrao);
 document.querySelectorAll(".js-wa-link").forEach(a => {
   a.href = "https://wa.me/" + CONFIG.whatsappOwner + "?text=" + mensagemPadraoCod;
 });
 document.getElementById("pixKeyText").textContent = CONFIG.pixKey;
-
+ 
 /* ---------- Ano automático no rodapé ---------- */
 document.getElementById("ano").textContent = new Date().getFullYear();
-
+ 
 /* ---------- Cabeçalho sólido ao rolar ---------- */
 const header = document.getElementById("header");
 window.addEventListener("scroll", () => header.classList.toggle("solid", window.scrollY > 40));
-
+ 
 /* ---------- Menu mobile ---------- */
 const burgerBtn = document.getElementById("burgerBtn");
 const mobilePanel = document.getElementById("mobilePanel");
 burgerBtn.addEventListener("click", () => mobilePanel.classList.add("open"));
 document.getElementById("closePanel").addEventListener("click", (e) => { e.preventDefault(); mobilePanel.classList.remove("open"); });
 mobilePanel.querySelectorAll("a").forEach(a => a.addEventListener("click", () => mobilePanel.classList.remove("open")));
-
+ 
 /* ---------- Util ---------- */
 function formatBRL(n){ return "R$ " + n.toFixed(2).replace(".", ","); }
 function getProduto(id){ return PRODUTOS.find(p => p.id === id); }
-
+ 
 /* =========================================================
    CARRINHO — guardado no navegador (localStorage), sobrevive
    a recarregar a página
    ========================================================= */
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem("pimenta_cart") || "[]"); } catch(e){ cart = []; }
-
+ 
 function saveCart(){
   localStorage.setItem("pimenta_cart", JSON.stringify(cart));
   renderCartBadge();
@@ -821,14 +813,14 @@ function cartTotal(){
   return cart.reduce((sum, i) => { const p = getProduto(i.id); return p ? sum + p.preco * i.qty : sum; }, 0);
 }
 function cartCount(){ return cart.reduce((sum, i) => sum + i.qty, 0); }
-
+ 
 function renderCartBadge(){
   const badge = document.getElementById("cartBadge");
   const count = cartCount();
   badge.textContent = count;
   badge.classList.toggle("hide", count === 0);
 }
-
+ 
 function renderCartDrawer(){
   const wrap = document.getElementById("cartItemsWrap");
   if (cart.length === 0){
@@ -855,7 +847,7 @@ function renderCartDrawer(){
   }
   document.getElementById("cartTotalValue").textContent = formatBRL(cartTotal());
 }
-
+ 
 document.getElementById("cartItemsWrap").addEventListener("click", (e) => {
   const btn = e.target.closest("[data-action]");
   if (!btn) return;
@@ -865,7 +857,7 @@ document.getElementById("cartItemsWrap").addEventListener("click", (e) => {
   if (btn.dataset.action === "dec") changeCartQty(id, -1);
   if (btn.dataset.action === "remove") removeFromCart(id);
 });
-
+ 
 /* ---------- Abrir/fechar carrinho ---------- */
 const cartDrawer = document.getElementById("cartDrawer");
 const cartOverlay = document.getElementById("cartOverlay");
@@ -875,23 +867,23 @@ document.getElementById("cartOpenBtn").addEventListener("click", openCart);
 document.getElementById("cartCloseBtn").addEventListener("click", closeCart);
 cartOverlay.addEventListener("click", closeCart);
 document.getElementById("cartCheckoutBtn").addEventListener("click", closeCart);
-
+ 
 /* =========================================================
    CATÁLOGO — monta os cards a partir de PRODUTOS
    ========================================================= */
 const produtosGrid = document.getElementById("produtosGrid");
 let categoriaAtiva = "todos";
-
+ 
 function renderCatalogo(){
   const lista = categoriaAtiva === "todos"
     ? PRODUTOS
     : PRODUTOS.filter(p => p.categorias.includes(categoriaAtiva));
-
+ 
   if (lista.length === 0){
     produtosGrid.innerHTML = '<p class="empty-msg">Nenhum produto nessa categoria ainda.</p>';
     return;
   }
-
+ 
   produtosGrid.innerHTML = lista.map(p => `
     <div class="produto-card">
       <div class="thumb" data-open="${p.id}"><img src="${p.imagens[0]}" alt="${p.nome}"></div>
@@ -905,7 +897,7 @@ function renderCatalogo(){
     </div>
   `).join("");
 }
-
+ 
 document.getElementById("catTabs").addEventListener("click", (e) => {
   const tab = e.target.closest(".cat-tab");
   if (!tab) return;
@@ -914,7 +906,7 @@ document.getElementById("catTabs").addEventListener("click", (e) => {
   categoriaAtiva = tab.dataset.cat;
   renderCatalogo();
 });
-
+ 
 produtosGrid.addEventListener("click", (e) => {
   const openBtn = e.target.closest("[data-open]");
   const addBtn = e.target.closest("[data-quickadd]");
@@ -926,7 +918,7 @@ produtosGrid.addEventListener("click", (e) => {
     setTimeout(() => { addBtn.textContent = "Adicionar ao Carrinho"; addBtn.classList.remove("added"); }, 1500);
   }
 });
-
+ 
 /* =========================================================
    MODAL DE PRODUTO (galeria + descrição completa)
    ========================================================= */
@@ -934,7 +926,7 @@ const modalOverlay = document.getElementById("modalOverlay");
 let modalProdutoAtual = null;
 let modalQty = 1;
 let modalImgIndex = 0;
-
+ 
 function showModalImage(idx){
   if (!modalProdutoAtual) return;
   const total = modalProdutoAtual.imagens.length;
@@ -942,7 +934,7 @@ function showModalImage(idx){
   document.getElementById("modalMainImg").src = modalProdutoAtual.imagens[modalImgIndex];
   document.querySelectorAll("#modalThumbs button").forEach((b, i) => b.classList.toggle("active", i === modalImgIndex));
 }
-
+ 
 function openModal(id){
   const p = getProduto(id);
   if (!p) return;
@@ -962,16 +954,16 @@ function openModal(id){
 function closeModal(){ modalOverlay.classList.remove("open"); }
 document.getElementById("modalClose").addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
-
+ 
 document.getElementById("modalThumbs").addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
   showModalImage(Number(btn.dataset.idx));
 });
-
+ 
 document.getElementById("modalPrevBtn").addEventListener("click", () => showModalImage(modalImgIndex - 1));
 document.getElementById("modalNextBtn").addEventListener("click", () => showModalImage(modalImgIndex + 1));
-
+ 
 /* Setas do teclado (← →) também funcionam quando a janela do produto está aberta */
 document.addEventListener("keydown", (e) => {
   if (!modalOverlay.classList.contains("open")) return;
@@ -979,10 +971,10 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") showModalImage(modalImgIndex + 1);
   if (e.key === "Escape") closeModal();
 });
-
+ 
 document.getElementById("modalQtyPlus").addEventListener("click", () => { modalQty++; document.getElementById("modalQtyValue").textContent = modalQty; });
 document.getElementById("modalQtyMinus").addEventListener("click", () => { if (modalQty > 1) modalQty--; document.getElementById("modalQtyValue").textContent = modalQty; });
-
+ 
 document.getElementById("modalAddBtn").addEventListener("click", () => {
   if (!modalProdutoAtual) return;
   addToCart(modalProdutoAtual.id, modalQty);
@@ -990,7 +982,7 @@ document.getElementById("modalAddBtn").addEventListener("click", () => {
   btn.textContent = "Adicionado ✓";
   setTimeout(() => { btn.textContent = "Adicionar ao Carrinho"; closeModal(); }, 700);
 });
-
+ 
 /* =========================================================
    RESUMO DO PEDIDO (dentro do formulário de checkout)
    ========================================================= */
@@ -1010,7 +1002,7 @@ function renderOrderSummary(){
   }
   document.getElementById("totalValue").textContent = formatBRL(cartTotal());
 }
-
+ 
 /* ---------- Mostrar campos de entrega só quando necessário ---------- */
 const tipoEntrega = document.getElementById("tipoEntrega");
 const entregaFields = document.getElementById("entregaFields");
@@ -1022,7 +1014,7 @@ function toggleEntrega(){
   document.getElementById("cidade").required = isEntrega;
 }
 tipoEntrega.addEventListener("change", toggleEntrega);
-
+ 
 /* ---------- Mostrar aviso certo conforme a forma de pagamento ---------- */
 const notePix = document.getElementById("notePix");
 const noteCartao = document.getElementById("noteCartao");
@@ -1033,7 +1025,7 @@ function togglePayNote(){
 }
 document.querySelectorAll('input[name="pagamento"]').forEach(r => r.addEventListener("change", togglePayNote));
 togglePayNote();
-
+ 
 document.getElementById("copyPixBtn").addEventListener("click", () => {
   navigator.clipboard.writeText(CONFIG.pixKey).then(() => {
     const btn = document.getElementById("copyPixBtn");
@@ -1042,18 +1034,18 @@ document.getElementById("copyPixBtn").addEventListener("click", () => {
     setTimeout(() => btn.textContent = original, 1500);
   });
 });
-
+ 
 /* =========================================================
    ENVIO DO PEDIDO PARA O WHATSAPP
    ========================================================= */
 const form = document.getElementById("pedidoForm");
 const fallbackWrap = document.getElementById("fallbackLink");
 const fallbackA = document.getElementById("fallbackA");
-
+ 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (cart.length === 0) return;
-
+ 
   const nome = document.getElementById("nome").value.trim();
   const whatsapp = document.getElementById("whatsapp").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -1064,7 +1056,7 @@ form.addEventListener("submit", (e) => {
   const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
   const obs = document.getElementById("obs").value.trim();
   const total = formatBRL(cartTotal());
-
+ 
   let mensagem = `🔔 Novo Pedido — Pimenta Parfum\n\n`;
   mensagem += `Cliente: ${nome}\n`;
   mensagem += `WhatsApp: ${whatsapp}\n`;
@@ -1080,23 +1072,23 @@ form.addEventListener("submit", (e) => {
   if (pagamento === "Pix") mensagem += `(Chave Pix informada ao cliente: ${CONFIG.pixKey})\n`;
   mensagem += `\nValor Total: ${total}\n`;
   if (obs) mensagem += `\nObservações: ${obs}\n`;
-
+ 
   const link = "https://wa.me/" + CONFIG.whatsappOwner + "?text=" + encodeURIComponent(mensagem);
   fallbackA.href = link;
   fallbackWrap.style.display = "block";
   window.open(link, "_blank");
-
+ 
   cart = [];
   saveCart();
 });
-
+ 
 /* ---------- Animações de entrada ao rolar ---------- */
 const revealEls = document.querySelectorAll(".reveal");
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("in"); });
 }, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
-
+ 
 /* ---------- Inicialização ---------- */
 renderCatalogo();
 renderCartBadge();
@@ -1106,3 +1098,8 @@ toggleEntrega();
 </script>
 </body>
 </html>
+ 
+
+
+
+
