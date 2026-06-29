@@ -10,6 +10,12 @@ Index · HTML
 <meta name="description" content="Pimenta Parfum. Perfumaria de alto padrão, acessível. Conheça o Imperium e o catálogo completo.">
 <link rel="icon" href="assets/logo.png">
  
+<!-- Open Graph: corrige o título mostrado por navegadores embutidos (WhatsApp, Instagram, Facebook) -->
+<meta property="og:title" content="Pimenta Parfum">
+<meta property="og:description" content="Perfumaria de alto padrão, acessível. Conheça o Imperium e o catálogo completo.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/logo.png">
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
@@ -207,6 +213,29 @@ nav.links a:hover::after{ right:0; }
 .add-cart-btn:hover{ background: var(--silver-1); color: var(--ink); }
 .add-cart-btn.added{ background: var(--garnet); color:#fff; border-color: var(--garnet); }
 .empty-msg{ text-align:center; color: var(--silver-3); padding: 40px 0; grid-column: 1/-1; }
+ 
+/* Blocos de categoria (aba "Todos"): 2 colunas, até 3 linhas, + botão Ver mais */
+.categoria-bloco{ margin-bottom: 56px; }
+.categoria-bloco:last-child{ margin-bottom: 0; }
+.categoria-titulo{ font-size: 22px; color: var(--silver-1); margin-bottom: 22px; text-align:center; }
+.preview-grid{ grid-template-columns: repeat(2, 1fr); max-width: 640px; margin: 0 auto; }
+.ver-mais-wrap{ text-align:center; margin-top: 26px; }
+.ver-mais-btn{
+  display:inline-block; padding: 12px 28px; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase;
+  border:1px solid var(--silver-2); color: var(--silver-1); border-radius: var(--radius);
+  transition: background .25s ease, color .25s ease;
+}
+.ver-mais-btn:hover{ background: var(--silver-1); color: var(--ink); }
+ 
+@media (max-width: 680px){
+  .produtos-grid{ grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .preview-grid{ max-width: 100%; }
+  .produto-card .info{ padding: 14px 14px 18px; }
+  .produto-card h3{ font-size:15px; margin:5px 0 8px; }
+  .produto-card .preco{ font-size:16px; margin-bottom:12px; }
+  .add-cart-btn{ font-size:10.5px; padding:9px; }
+  .categoria-titulo{ font-size:19px; }
+}
  
 /* =========================================================
    5. MODAL DE PRODUTO
@@ -871,17 +900,10 @@ document.getElementById("cartCheckoutBtn").addEventListener("click", closeCart);
 const produtosGrid = document.getElementById("produtosGrid");
 let categoriaAtiva = "todos";
  
-function renderCatalogo(){
-  const lista = categoriaAtiva === "todos"
-    ? PRODUTOS
-    : PRODUTOS.filter(p => p.categorias.includes(categoriaAtiva));
+const CATEGORIA_LABEL = { feminino: "Feminino", masculino: "Masculino", infantil: "Infantil" };
  
-  if (lista.length === 0){
-    produtosGrid.innerHTML = '<p class="empty-msg">Nenhum produto nessa categoria ainda.</p>';
-    return;
-  }
- 
-  produtosGrid.innerHTML = lista.map(p => `
+function cardHTML(p){
+  return `
     <div class="produto-card">
       <div class="thumb" data-open="${p.id}"><img src="${p.imagens[0]}" alt="${p.nome}"></div>
       <div class="info">
@@ -891,22 +913,49 @@ function renderCatalogo(){
         <button class="add-cart-btn" data-quickadd="${p.id}">Adicionar ao Carrinho</button>
 <a href="https://wa.me/5521964176126?text=Olá, quero comprar o perfume ${p.nome}" style="display:block; text-align:center; margin-top:5px; background:#25d366; color:white; padding:5px; border-radius:5px; text-decoration:none;">Comprar Agora</a>
       </div>
-    </div>
-  `).join("");
+    </div>`;
 }
  
-document.getElementById("catTabs").addEventListener("click", (e) => {
-  const tab = e.target.closest(".cat-tab");
-  if (!tab) return;
-  document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
-  tab.classList.add("active");
-  categoriaAtiva = tab.dataset.cat;
+function irParaCategoria(cat){
+  categoriaAtiva = cat;
+  document.querySelectorAll(".cat-tab").forEach(t => t.classList.toggle("active", t.dataset.cat === cat));
   renderCatalogo();
-});
+  document.getElementById("catalogo").scrollIntoView({ behavior: "smooth", block: "start" });
+}
  
-produtosGrid.addEventListener("click", (e) => {
+function renderCatalogo(){
+  if (categoriaAtiva === "todos"){
+    const cats = ["feminino", "masculino", "infantil"];
+    const blocos = cats.map(cat => {
+      const lista = PRODUTOS.filter(p => p.categorias.includes(cat));
+      if (lista.length === 0) return "";
+      const preview = lista.slice(0, 6); // 2 colunas x 3 linhas
+      return `
+        <div class="categoria-bloco">
+          <h3 class="categoria-titulo">${CATEGORIA_LABEL[cat]}</h3>
+          <div class="produtos-grid preview-grid">
+            ${preview.map(cardHTML).join("")}
+          </div>
+          ${lista.length > 6 ? `<div class="ver-mais-wrap"><button class="ver-mais-btn" data-vermais="${cat}">Ver mais ${CATEGORIA_LABEL[cat]}</button></div>` : ""}
+        </div>`;
+    }).join("");
+    document.getElementById("produtosGrid").outerHTML = `<div class="reveal" id="produtosGrid">${blocos || '<p class="empty-msg">Nenhum produto cadastrado ainda.</p>'}</div>`;
+  } else {
+    const lista = PRODUTOS.filter(p => p.categorias.includes(categoriaAtiva));
+    if (lista.length === 0){
+      document.getElementById("produtosGrid").outerHTML = '<div class="produtos-grid reveal" id="produtosGrid"><p class="empty-msg">Nenhum produto nessa categoria ainda.</p></div>';
+      return;
+    }
+    document.getElementById("produtosGrid").outerHTML = `<div class="produtos-grid reveal" id="produtosGrid">${lista.map(cardHTML).join("")}</div>`;
+  }
+  // o elemento foi recriado, então reataremos o listener de clique nele
+  document.getElementById("produtosGrid").addEventListener("click", onProdutosGridClick);
+}
+ 
+function onProdutosGridClick(e){
   const openBtn = e.target.closest("[data-open]");
   const addBtn = e.target.closest("[data-quickadd]");
+  const verMaisBtn = e.target.closest("[data-vermais]");
   if (openBtn) openModal(openBtn.dataset.open);
   if (addBtn){
     addToCart(addBtn.dataset.quickadd, 1);
@@ -914,6 +963,13 @@ produtosGrid.addEventListener("click", (e) => {
     addBtn.classList.add("added");
     setTimeout(() => { addBtn.textContent = "Adicionar ao Carrinho"; addBtn.classList.remove("added"); }, 1500);
   }
+  if (verMaisBtn) irParaCategoria(verMaisBtn.dataset.vermais);
+}
+ 
+document.getElementById("catTabs").addEventListener("click", (e) => {
+  const tab = e.target.closest(".cat-tab");
+  if (!tab) return;
+  irParaCategoria(tab.dataset.cat);
 });
  
 /* =========================================================
