@@ -807,6 +807,9 @@ mobilePanel.querySelectorAll("a").forEach(a => a.addEventListener("click", () =>
 /* ---------- Util ---------- */
 function formatBRL(n){ return "R$ " + n.toFixed(2).replace(".", ","); }
 function getProduto(id){ return PRODUTOS.find(p => p.id === id); }
+// as fotos dos produtos ficam dentro da pasta assets/ no repositório,
+// então toda vez que exibimos uma imagem de produto, prefixamos o caminho.
+function imgPath(nomeArquivo){ return "assets/" + nomeArquivo; }
  
 /* =========================================================
    CARRINHO — guardado no navegador (localStorage), sobrevive
@@ -857,7 +860,7 @@ function renderCartDrawer(){
       if (!p) return "";
       return `
         <div class="cart-item">
-          <img src="${p.imagens[0]}" alt="${p.nome}">
+          <img src="${imgPath(p.imagens[0])}" alt="${p.nome}">
           <div class="ci-info">
             <h4>${p.nome}</h4>
             <div class="ci-qty">
@@ -905,7 +908,7 @@ const CATEGORIA_LABEL = { feminino: "Feminino", masculino: "Masculino", infantil
 function cardHTML(p){
   return `
     <div class="produto-card">
-      <div class="thumb" data-open="${p.id}"><img src="${p.imagens[0]}" alt="${p.nome}"></div>
+      <div class="thumb" data-open="${p.id}"><img src="${imgPath(p.imagens[0])}" alt="${p.nome}"></div>
       <div class="info">
         <span class="tag">${p.categorias.join(" · ")}</span>
         <h3 data-open="${p.id}">${p.nome}</h3>
@@ -989,7 +992,7 @@ function showModalImage(idx){
   if (!modalProdutoAtual) return;
   const total = modalProdutoAtual.imagens.length;
   modalImgIndex = (idx + total) % total; // mantém o índice sempre dentro do alcance, "dando a volta"
-  document.getElementById("modalMainImg").src = modalProdutoAtual.imagens[modalImgIndex];
+  document.getElementById("modalMainImg").src = imgPath(modalProdutoAtual.imagens[modalImgIndex]);
   document.querySelectorAll("#modalThumbs button").forEach((b, i) => b.classList.toggle("active", i === modalImgIndex));
 }
  
@@ -1004,7 +1007,7 @@ function openModal(id){
   document.getElementById("modalPreco").textContent = formatBRL(p.preco);
   document.getElementById("modalQtyValue").textContent = modalQty;
   document.getElementById("modalThumbs").innerHTML = p.imagens.map((img, idx) => `
-    <button data-idx="${idx}" class="${idx === 0 ? "active" : ""}"><img src="${img}" alt=""></button>
+    <button data-idx="${idx}" class="${idx === 0 ? "active" : ""}"><img src="${imgPath(img)}" alt=""></button>
   `).join("");
   showModalImage(0);
   modalOverlay.classList.add("open");
